@@ -15,10 +15,10 @@ const keys = {
   upperCase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   lowerCase: "abcdefghijklmnopqrstuvwxyz",
   number: "0123456789",
-  symbol: "!@#$%^&*()_+~\\`|}{[]:;?><,./-=",
+  special: "!@#$%^&*()_+~\\`|}{[]:;?><,./-="
 };
 
-// array to select the characters selected for the password
+// array to select the characters out of the keys  for the password
 const getKey = [
   function upperCase() {
     return keys.upperCase[Math.floor(Math.random() * keys.upperCase.length)];
@@ -29,8 +29,8 @@ const getKey = [
   function number() {
     return keys.number[Math.floor(Math.random() * keys.number.length)];
   },
-  function symbol() {
-    return keys.symbol[Math.floor(Math.random() * keys.symbol.length)];
+  function special() {
+    return keys.special[Math.floor(Math.random() * keys.special.length)];
   },
 ];
 
@@ -51,27 +51,32 @@ function writePassword() {
 function generatePassword() {
   //user choice of character types
   chooseCharacterTypes();
-  //password length
+  //user provided password length
   createPasswordLength();
 
   /////generate the password
-  // update this to a for loop with the ++
+  // while the user selected passwordLength is > than the password.length, loop over the character keys and add a character to the passwork
   while (passwordLength.value > password.length) {
+    // keyToAdd is generating a random number between 1 and 4 to which will be used to randomly select one charater types in the keys array
     let keyToAdd = getKey[Math.floor(Math.random() * getKey.length)];
-    //update the next three lines to look at four user selected character types
-    // includeLowerCase
-    // includeUpperCase
-    // includeNumericChars
-    // includeSpecialChars
-    //may need to look at each one, one at a time and if true ...
-    let isChecked = document.getElementById(keyToAdd.name).checked;
-    // then add the key identified by keyTo Add to the password
-    if (isChecked) {
-      password += keyToAdd();
-    }
+    // if the character type was selected by user and and the keyToAdd function, then add a character to the password
+    if (includeUpperCase && keyToAdd.name === upperCase)
+      {
+        password += keyToAdd();
+      } else if (includeLowerCase && keyToAdd.name === lowerCase) {
+        password += keyToAdd();
+      } else if (includeNumericChars && keyToAdd.name === number) {
+        password += keyToAdd(); 
+      } else if (includeSpecialChars && keyToAdd.name === special) {
+        password += keyToAdd(); 
+      } else {
+        alert(`Help! Password generation problem. Password created so far is: ${password}`);
+      }
+    // ... then add the key identified by keyTo Add to the password
+    //   password += keyToAdd();
+    // }
     return password;
   }
-}
 
 //select character types for password
 function chooseCharacterTypes() {
