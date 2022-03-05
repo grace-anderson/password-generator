@@ -8,6 +8,12 @@ function writePassword() {
 
   passwordText.value = password;
 
+  passwordLength();
+}
+
+//prompt for password length
+function passwordLength() {
+  var passwordLength = prompt("Enter a number between 8 and 128");
 }
 
 // Add event listener to generate button
