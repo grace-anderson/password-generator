@@ -21,7 +21,6 @@ function generatePassword() {
 
 //select character types for password
 function chooseCharacterTypes() {
-  // choose lowercase
   var includeLowerCase = window.confirm(
     "Do you want LOWER case letters in your password?"
   );
@@ -52,8 +51,14 @@ function chooseCharacterTypes() {
       Special Characters: ${includeSpecialChars}`
     );
   } else {
-    alert(`You must select at least one character type for your password. Have another try`);
-    chooseCharacterTypes()
+    var continueOrExit = window.confirm(
+      `You must select at least one character type for your password. Have another try or select Cancel to exit.`
+    );
+    if (!continueOrExit) {
+      return; //this return is not working-should close prompt and return user to main page.
+    } else {
+      chooseCharacterTypes();
+    }
   }
 }
 
