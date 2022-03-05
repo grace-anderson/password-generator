@@ -11,26 +11,28 @@ var includeNumericChars = false;
 var includeSpecialChars = false;
 
 //characters to be used when creating password
-const keys = {
+var chars = {
   upperCase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   lowerCase: "abcdefghijklmnopqrstuvwxyz",
   number: "0123456789",
-  special: "!@#$%^&*()_+~\\`|}{[]:;?><,./-="
+  special: "!@#$%^&*()_+~\\`|}{[]:;?><,./-=",
 };
 
-// array to select the characters out of the keys  for the password
-const getKey = [
+console.log(chars);
+
+// array from which to select the characters for the password
+var getChar = [
   function upperCase() {
-    return keys.upperCase[Math.floor(Math.random() * keys.upperCase.length)];
+    return chars.upperCase[Math.floor(Math.random() * chars.upperCase.length)];
   },
   function lowerCase() {
-    return keys.lowerCase[Math.floor(Math.random() * keys.lowerCase.length)];
+    return chars.lowerCase[Math.floor(Math.random() * chars.lowerCase.length)];
   },
   function number() {
-    return keys.number[Math.floor(Math.random() * keys.number.length)];
+    return chars.number[Math.floor(Math.random() * chars.number.length)];
   },
   function special() {
-    return keys.special[Math.floor(Math.random() * keys.special.length)];
+    return chars.special[Math.floor(Math.random() * chars.special.length)];
   },
 ];
 
@@ -43,40 +45,43 @@ function writePassword() {
   password = generatePassword();
   //display the password generated returned by reneratePassword
   var passwordText = document.querySelector("#password");
+  console.log("passwordText: " + passwordText);
 
   passwordText.value = password;
+  console.log("writePassword: " + password);
 }
+
 
 // function to create the password
 function generatePassword() {
-  //user choice of character types
+
+  //user chooses character types
   chooseCharacterTypes();
-  //user provided password length
+  //user provides password length
   createPasswordLength();
 
-  /////generate the password
-  // while the user selected passwordLength is > than the password.length, loop over the character keys and add a character to the passwork
-  while (passwordLength.value > password.length) {
-    // keyToAdd is generating a random number between 1 and 4 to which will be used to randomly select one charater types in the keys array
-    let keyToAdd = getKey[Math.floor(Math.random() * getKey.length)];
-    // if the character type was selected by user and and the keyToAdd function, then add a character to the password
-    if (includeUpperCase && keyToAdd.name === upperCase)
-      {
-        password += keyToAdd();
-      } else if (includeLowerCase && keyToAdd.name === lowerCase) {
-        password += keyToAdd();
-      } else if (includeNumericChars && keyToAdd.name === number) {
-        password += keyToAdd(); 
-      } else if (includeSpecialChars && keyToAdd.name === special) {
-        password += keyToAdd(); 
-      } else {
-        alert(`Help! Password generation problem. Password created so far is: ${password}`);
-      }
-    // ... then add the key identified by keyTo Add to the password
-    //   password += keyToAdd();
-    // }
+  /////generate the password ////////////
+  
+    for(var i=0; i < passwordLength; i++) {
+    // charToAdd is generating a random number between 1 and 4 to which will be used to randomly select one charater types from the chars
+    var charToAdd = getChar[Math.floor(Math.random() * getChar.length)];
+    // if the character type was selected by user and and the charToAdd function, then add a character to the password
+    if (includeUpperCase && charToAdd.name === "upperCase") {
+      password += charToAdd();
+    } else if (includeLowerCase && charToAdd.name === "lowerCase") {
+      password += charToAdd();
+    } else if (includeNumericChars && charToAdd.name === "number") {
+      password += charToAdd();
+    } else if (includeSpecialChars && charToAdd.name === "special") {
+      password += charToAdd();
+    } else {
+      alert(`Password cannot be generated`);
+    }
+    // then return password to writePassword()
+    console.log("Password: " + password);
     return password;
   }
+}
 
 //select character types for password
 function chooseCharacterTypes() {
