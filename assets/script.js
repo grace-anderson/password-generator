@@ -43,7 +43,7 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   //password is the return value of the function generatePassword
   password = generatePassword();
-  //display the password generated returned by reneratePassword
+  //display the password generated returned by generatePassword
   var passwordText = document.querySelector("#password");
   console.log("passwordText: " + passwordText);
 
