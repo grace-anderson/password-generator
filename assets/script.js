@@ -3,37 +3,79 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
+  //password is the return value of the function generatePassword
   var password = generatePassword();
+  //display the password generated returned by reneratePassword
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
 }
 
+// function to create the password
 function generatePassword() {
+  //user choice of character types
+  chooseCharacterTypes();
   //password length
   createPasswordLength();
 }
 
-// function to create password length
+//select character types for password
+function chooseCharacterTypes() {
+  // choose lowercase
+  var includeLowerCase = window.confirm(
+    "Do you want LOWER case letters in your password?"
+  );
+
+  var includeUpperCase = window.confirm(
+    "Do you want UPPER case letters in your password?"
+  );
+
+  var includeNumericChars = window.confirm(
+    "Do you want NUMERIC characters in your password?"
+  );
+
+  var includeSpecialChars = window.confirm(
+    "Do you want SPECIAL characters in your password?"
+  );
+
+  if (
+    includeLowerCase === true ||
+    includeUpperCase === true ||
+    includeNumericChars === true ||
+    includeSpecialChars === true
+  ) {
+    alert(
+      `Your password will include the character types marked "true"
+      Lower Case: ${includeLowerCase}
+      Upper Case: ${includeUpperCase}
+      Numeric Characters: ${includeNumericChars}
+      Special Characters: ${includeSpecialChars}`
+    );
+  } else {
+    alert(`You must select at least one character type for your password. Have another try`);
+    chooseCharacterTypes()
+  }
+}
+
+// create password length
 function createPasswordLength() {
-  var passwordLength = prompt(
+  var userPasswordLength = prompt(
     "Enter a number greater than 0 and between 8 and 128"
   );
-  if (passwordLength === null) {
+  if (userPasswordLength === null) {
     return; // break out of the prompt
-  } else if (passwordLength < 8 || passwordLength > 128) {
-    createPasswordLength();
-    return;
-  } else if (passwordLength === 0) {
-    createPasswordLength();
-    return;
-  } else if (isNaN(passwordLength)) {
+  } else if (
+    userPasswordLength < 8 ||
+    userPasswordLength > 128 ||
+    userPasswordLength === 0 ||
+    isNaN(userPasswordLength)
+  ) {
     createPasswordLength();
     return;
   } else {
-    console.log(passwordLength);
-    alert(`Your chosen password length is ${passwordLength}`);
-    passwordText = `Your chosen password length is ${passwordLength}`;
+    console.log(userPasswordLength);
+    alert(`Your chosen password length is ${userPasswordLength}`);
+    return userPasswordLength;
   }
 }
 
