@@ -18,8 +18,6 @@ var chars = {
   special: "!@#$%^&*()_+~\\`|}{[]:;?><,./-=",
 };
 
-console.log(chars);
-
 // array from which to select the characters for the password
 var getChar = [
   function upperCase() {
@@ -37,6 +35,7 @@ var getChar = [
 ];
 
 // Assignment Code ////////////////////////////////////////
+// Generate password button
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
@@ -51,36 +50,34 @@ function writePassword() {
   console.log("writePassword: " + password);
 }
 
-
 // function to create the password
 function generatePassword() {
-
   //user chooses character types
   chooseCharacterTypes();
   //user provides password length
   createPasswordLength();
 
   /////generate the password ////////////
-  
-    for(var i=0; i < passwordLength; i++) {
+
+  for (var i = 0; i < passwordLength; i++) {
     // charToAdd is generating a random number between 1 and 4 to which will be used to randomly select one charater types from the chars
     var charToAdd = getChar[Math.floor(Math.random() * getChar.length)];
     // if the character type was selected by user and and the charToAdd function, then add a character to the password
-    if (includeUpperCase && charToAdd.name === "upperCase") {
+  
+    if (includeUpperCase) {
       password += charToAdd();
-    } else if (includeLowerCase && charToAdd.name === "lowerCase") {
+    } else if (includeLowerCase) {
       password += charToAdd();
-    } else if (includeNumericChars && charToAdd.name === "number") {
-      password += charToAdd();
-    } else if (includeSpecialChars && charToAdd.name === "special") {
+    } else if (includeNumericChars) {
       password += charToAdd();
     } else {
-      alert(`Password cannot be generated`);
+      //includeSpecialChars //
+        password += charToAdd();
     }
     // then return password to writePassword()
     console.log("Password: " + password);
-    return password;
   }
+  return password;
 }
 
 //select character types for password
