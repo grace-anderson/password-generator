@@ -1,6 +1,22 @@
 # Password Generator
 
-**TO COMPLETE**
+## Purpose
+The password generator is a tool for generating a secure password. Longer passwords created from multiple chachter types provide greater security and thus greater protection to sensitive data.
+
+The password generator gives you control over password length and the character types that comprise the password text.
+
+## Usage
+Use the Password Generator to generate a password by choosing
+- a password length between 8 and 128 characters, and 
+- one or more character types from a choice of four character types: 
+  - upper case letters
+  - lower case letters
+  - numbers 
+  - special characters
+
+After length and characters are chosen, the password will display on the Password Generator webpage for you to copy.
+
+------------------------------------PROVIDED------------------------------------
 
 ## Your Task
 

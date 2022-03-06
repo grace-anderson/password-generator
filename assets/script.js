@@ -26,10 +26,10 @@ function writePassword() {
 
 // function to create the password
 function generatePassword() {
-  //user chooses character types
-  chooseCharacterTypes();
   //user provides password length
   createPasswordLength();
+  //user chooses character types
+  chooseCharacterTypes();
 
   ///// START generate the password ///////////////////////
 
@@ -72,6 +72,32 @@ function generatePassword() {
   return password;
 }
 
+// create password length
+function createPasswordLength() {
+  // get user's choice for password length
+  var userPasswordLength = prompt(
+    `Choose your password length:
+      Enter a number greater than 0 and between 8 and 128`
+  );
+  if (userPasswordLength === null) {
+    return; // break out of the prompt
+  } else if (
+    userPasswordLength < 8 ||
+    userPasswordLength > 128 ||
+    userPasswordLength === 0 ||
+    isNaN(userPasswordLength)
+  ) {
+    createPasswordLength();
+    return;
+  } else {
+    console.log(userPasswordLength);
+    alert(`Your chosen password length is ${userPasswordLength}`);
+    passwordLength = parseInt(userPasswordLength);
+    console.log("parseInt password length: " + passwordLength);
+    return passwordLength;
+  }
+}
+
 //select character types for password
 function chooseCharacterTypes() {
   // get user's choice of characters to include in password
@@ -103,38 +129,9 @@ function chooseCharacterTypes() {
       Special Characters: ${includeSpecialChars}`
     );
   } else {
-    window.confirm(
-      `You must select at least one character type for your password. Select OK to try again or select Cancel to exit.`
-    );
-    if (confirm() == true) {
-      chooseCharacterTypes();
-    } else
-    return; ///cannot work out how to close the window.confirm() here;
-  }
-}
-
-// create password length
-function createPasswordLength() {
-  // get user's choice for password length
-  var userPasswordLength = prompt(
-    "Enter a number greater than 0 and between 8 and 128"
-  );
-  if (userPasswordLength === null) {
-    return; // break out of the prompt
-  } else if (
-    userPasswordLength < 8 ||
-    userPasswordLength > 128 ||
-    userPasswordLength === 0 ||
-    isNaN(userPasswordLength)
-  ) {
-    createPasswordLength();
-    return;
-  } else {
-    console.log(userPasswordLength);
-    alert(`Your chosen password length is ${userPasswordLength}`);
-    passwordLength = parseInt(userPasswordLength);
-    console.log("parseInt password length: " + passwordLength);
-    return passwordLength;
+    alert(`You must select at least one character type for your password.`);
+    chooseCharacterTypes();
+    /// cannot work out how provide the option for the user to exit the pop-ups here if they don't want to continue;
   }
 }
 
