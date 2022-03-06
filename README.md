@@ -1,9 +1,11 @@
 # Password Generator
 
-## Purpose
-The password generator is a tool for generating a secure password. Longer passwords created from multiple chachter types provide greater security and thus greater protection to sensitive data.
 
-The password generator gives you control over password length and the character types that comprise the password text.
+## Purpose
+The password generator is a tool for generating a secure password. Longer passwords created from multiple character types provide greater security and thus greater protection of sensitive data.
+
+The password generator gives you control over password length and the character types used to create the password text.
+
 
 ## Usage
 Use the Password Generator to generate a password by choosing
@@ -14,7 +16,82 @@ Use the Password Generator to generate a password by choosing
   - numbers 
   - special characters
 
-After length and characters are chosen, the password will display on the Password Generator webpage for you to copy.
+### Instructions
+
+#### 1. Click Generate Password
+Clicking the **Generate Password** button triggers a series of prompts. 
+
+#### 2. Choose password length
+The first prompt asks you to input a password length between 8 and 128 characters. 
+A prompt confirms the number you entered.
+
+#### 3. Choose password character types
+Then you are presented for a prompt for each of the four character types. 
+- Select **OK** to use the character type in your password's text
+- Select **Cancel** to exclude the character type from your password's text
+A prompt confirms the character types you selected.
+
+#### 4. Display password 
+After you've chosen password length and the character types:
+- a password will be generated using the selected character types
+- the generated password will display in the read only text area of the Password Generator webpage
+
+### 5. Use the password
+Select the password text and use your local copy function (e.g. ctrl + c on Windows) to copy the text. Then paste the passwork using your local paste function (e.g. ctrl + v on Windows) where required.
+
+
+## Features
+
+The Password Generator
+- Enables a user to input their preferred password length
+- Provides the user a choice of four character types from which the user can use one or multiple character types
+- Generates a password that 
+  - consists of randomly selected characters from the user's selected character types 
+  -  matches the password length inputted by the user
+- Displays the generated password to the user in a form that the user can copy to use as required
+- Validates the user's unput and selections so that a secure password is generated
+  - password length must be inputted as a number between 8 and 128
+  - at least one character type must be selected
+  - generates the password when all validations are met
+- Generates a password that matches the user's selected criteria
+- Allows the user to repeat password generation (by clicking the "Password Generation" button without leaving the application) if they wish to create additional passwords
+  
+## Tests
+
+1. When the application opens, I am presented with a page that matches Mockup 1 (below)
+2. WHen the application opens "Your Secure Password" placeholder text displays as read only in the text area (box with dashed boarder) (see Mockup 1 below)
+3. When I click the **Generate Password** button, the first prompt appears requesting password length (see Mockup 2 below)
+4. When I enter a number between 8 and 128 inclusive in the password length prompt, the number I entered is confirmed (see Mockup 3 below) 
+5. If I do not enter a number between 8 and 128 inclusive in the password length prompt, the password length prompt input field clears so that I can enter a valid number
+6. When I click OK to the password length confirmation prompt, I am presented with a series of four prompts requesting confirmation of character types (see Mockup 3 below)
+7. If I click OK to the character type prompt, that character type will be included in the password AND I will be presented with the next prompt.
+8. If I click Cancel to the character type prompt, that character type will not be included in the password AND I will be presented with the next prompt.
+9. After I click OK or Cancel on the Special Characters prompt I am  presented with a confirmation of my charachter type selections. Selected character types are marked with "true". Non-selected character types are marked with "false". (see Mockup 4 below)
+10. When I click OK to the character type confirmation prompt, a password matching my inputted password length and selected character types displays in the text area (replacing the placeholder text)
+11. I can successfully copy the displayed password for use outside the application
+12. While the generated password displays in the application, I can select the **Generate Password** button and complete the prompts to generate a new password. The generated password remains on the page and is replaced by the newly generated password.
+
+
+
+## Challenges and Further Work
+### Generating the password
+I found collecting the user input straight forward (except for optimising user experience addressed below), generating a password that matched the user length and chosen character types was challenging.
+
+To help the process, I moved several variables outside function scope to global scope so these would be available anywhere in the application. I also moved code out of the generatePassword() function into their own functions, called by generatePassword() function, so that the purpose of each block was clear and the impact of tests and changes could be identified. This strategy enabled me to test different password generation code options until I could generate a password meeting the user's requirements. I also used console.log throughout to see what was being generated by each variable to enable trouble shoorting and correction.
+
+### Optimising user experience
+My abilities limited capacity to optimise user experience. I found the pop-ups difficult to customise, especially the prompt headings, and so have kept with the defaults.  
+
+There is an outstanding issue to resolve where the user cannot exit from the four character type choice prompts. 
+
+## Mock-Ups
+
+**TO DO**
+
+The following image shows the web application's appearance and functionality:
+
+![The Password Generator application displays a red button to "Generate Password".](./Assets/03-javascript-homework-demo.png)
+
 
 ------------------------------------PROVIDED------------------------------------
 
