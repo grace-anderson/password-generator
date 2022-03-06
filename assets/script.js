@@ -4,37 +4,15 @@ var characterTypeSelected = false;
 //variable for password length
 var passwordLength = 0;
 var password = "";
+var passwordText = "";
 //character types selected by the user
-var includeLowerCase = false;
 var includeUpperCase = false;
+var includeLowerCase = false;
 var includeNumericChars = false;
 var includeSpecialChars = false;
 
-//characters to be used when creating password
-var chars = {
-  upperCase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  lowerCase: "abcdefghijklmnopqrstuvwxyz",
-  number: "0123456789",
-  special: "!@#$%^&*()_+~\\`|}{[]:;?><,./-=",
-};
+////// Assignment Code //////////////////////////////////////
 
-// array from which to select the characters for the password
-var getChar = [
-  function upperCase() {
-    return chars.upperCase[Math.floor(Math.random() * chars.upperCase.length)];
-  },
-  function lowerCase() {
-    return chars.lowerCase[Math.floor(Math.random() * chars.lowerCase.length)];
-  },
-  function number() {
-    return chars.number[Math.floor(Math.random() * chars.number.length)];
-  },
-  function special() {
-    return chars.special[Math.floor(Math.random() * chars.special.length)];
-  },
-];
-
-// Assignment Code ////////////////////////////////////////
 // Generate password button
 var generateBtn = document.querySelector("#generate");
 
@@ -43,8 +21,7 @@ function writePassword() {
   //password is the return value of the function generatePassword
   password = generatePassword();
   //display the password generated returned by generatePassword
-  var passwordText = document.querySelector("#password");
-  console.log("passwordText: " + passwordText);
+  passwordText = document.querySelector("#password");
 
   passwordText.value = password;
   console.log("writePassword: " + password);
@@ -57,27 +34,44 @@ function generatePassword() {
   //user provides password length
   createPasswordLength();
 
-  /////generate the password ////////////
+  ///// START generate the password ///////////////////////
 
-  for (var i = 0; i < passwordLength; i++) {
-    // charToAdd is generating a random number between 1 and 4 to which will be used to randomly select one charater types from the chars
+  //characters used to password
+  var chars = {
+    upperCase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    lowerCase: "abcdefghijklmnopqrstuvwxyz",
+    number: "0123456789",
+    special: "!@#$%^&*()_+~\\`|}{[]:;?><,./-=",
+  };
 
-    var charToAdd = getChar[Math.floor(Math.random() * getChar.length)];
-    // if the character type was selected by user and and the charToAdd function, then add a character to the password
+  //Concatenate the password text from the user's chosen characters
 
-    if (includeUpperCase) {
-      password += charToAdd();
-    } else if (includeLowerCase) {
-      password += charToAdd();
-    } else if (includeNumericChars) {
-      password += charToAdd();
-    } else {
-      //includeSpecialChars //
-      password += charToAdd();
-    }
-    // then return password to writePassword()
-    console.log("Password: " + password);
+  // if the user selected includeUpperCase (=== true), then add upperCase characters to passwordText
+  if (includeUpperCase) {
+    passwordText += chars.upperCase;
   }
+  // if the user selected includeLowerCase (=== true), then add lowerCase characters to passwordText
+  if (includeLowerCase) {
+    passwordText += chars.lowerCase;
+  }
+  // if the user selected includeNumericChars (=== true), then add number characters to passwordText
+  if (includeNumericChars) {
+    passwordText += chars.number;
+  }
+  // if the user selected includeSpecialChars (=== true), then add special characters to passwordText
+  if (includeSpecialChars) {
+    passwordText += chars.special;
+  }
+  console.log("passwordText after characters chosen: " + passwordText);
+  // Using the concatenated password Text, randomly choose a character until the user's chosen password length is reached
+  for (var i = 0; i < passwordLength; i++) {
+    password += passwordText.charAt(
+      Math.floor(Math.random() * passwordText.length)
+    );
+  }
+  ///// END generate the password ///////////////////////
+
+  //return the generated password to the writePassword() function
   return password;
 }
 
@@ -100,16 +94,16 @@ function chooseCharacterTypes() {
   );
 
   if (
-    includeLowerCase === true ||
     includeUpperCase === true ||
+    includeLowerCase === true ||
     includeNumericChars === true ||
     includeSpecialChars === true
   ) {
     characterTypeSelected = true;
     alert(
       `Your password will include the character types marked "true"
-      Lower Case: ${includeLowerCase}
       Upper Case: ${includeUpperCase}
+      Lower Case: ${includeLowerCase}
       Numeric Characters: ${includeNumericChars}
       Special Characters: ${includeSpecialChars}`
     );
@@ -144,6 +138,7 @@ function createPasswordLength() {
     console.log(userPasswordLength);
     alert(`Your chosen password length is ${userPasswordLength}`);
     passwordLength = parseInt(userPasswordLength);
+    console.log("parseInt password length: " + passwordLength);
     return passwordLength;
   }
 }
