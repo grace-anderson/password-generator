@@ -61,9 +61,10 @@ function generatePassword() {
 
   for (var i = 0; i < passwordLength; i++) {
     // charToAdd is generating a random number between 1 and 4 to which will be used to randomly select one charater types from the chars
+
     var charToAdd = getChar[Math.floor(Math.random() * getChar.length)];
     // if the character type was selected by user and and the charToAdd function, then add a character to the password
-  
+
     if (includeUpperCase) {
       password += charToAdd();
     } else if (includeLowerCase) {
@@ -72,7 +73,7 @@ function generatePassword() {
       password += charToAdd();
     } else {
       //includeSpecialChars //
-        password += charToAdd();
+      password += charToAdd();
     }
     // then return password to writePassword()
     console.log("Password: " + password);
@@ -82,12 +83,12 @@ function generatePassword() {
 
 //select character types for password
 function chooseCharacterTypes() {
-  includeLowerCase = window.confirm(
-    "Do you want LOWER case letters in your password?"
-  );
-
   includeUpperCase = window.confirm(
     "Do you want UPPER case letters in your password?"
+  );
+
+  includeLowerCase = window.confirm(
+    "Do you want LOWER case letters in your password?"
   );
 
   includeNumericChars = window.confirm(
@@ -142,7 +143,7 @@ function createPasswordLength() {
   } else {
     console.log(userPasswordLength);
     alert(`Your chosen password length is ${userPasswordLength}`);
-    passwordLength = userPasswordLength;
+    passwordLength = parseInt(userPasswordLength);
     return passwordLength;
   }
 }
