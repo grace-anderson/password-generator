@@ -1,74 +1,64 @@
-// Global variables //
-//variable for password length
+//global variables
 var passwordLength = 0;
-//variables to hold generated password text and display password
-var passwordChars = "";
-var passwordText = "";
-var password = "";
-//variables for user selected character types
-//defaut is false; when user selects updates to true
 var includeUpperCase = false;
 var includeLowerCase = false;
 var includeNumericChars = false;
 var includeSpecialChars = false;
 
-// Create password button
 var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input to display to user in textarea
+// Write password to the #password text area
 function writePassword() {
-  //password is the return value of the function generatePassword()
-  password = generatePassword();
-  //display the password returned by generatePassword()
-  passwordText = document.querySelector("#password");
+  // Return password
+  var password = generatePassword();
+
+  // Select the password text area
+  var passwordText = document.querySelector("#password");
+
+  // Apply the generated password text to the text area
   passwordText.value = password;
 }
 
-// function to create the password
 function generatePassword() {
-  //user provides password length
-  createPasswordLength();
-  //user chooses character types
-  chooseCharacterTypes();
+  //user inputs passwordLength
+  createPasswordLength()
+  //user chooses character types to create password
+  chooseCharacterTypes()
 
-  ///// START generate the password ///////////////////////
-
-  //strings to be used to create passwordChar string
+  // strings to be concatenated to form the string from which the password is created
   var chars = {
-    upperCase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-    lowerCase: "abcdefghijklmnopqrstuvwxyz",
-    number: "0123456789",
-    special: "!@#$%^&*()_+~\\`|}{[]:;?><,./-=",
+    lowercase: "abcdefghijklmnopqrstuvwxyz",
+    uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    numeric: "0123456789",
+    special: "!#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",
   };
 
-  //Concatenate a string from the user's chosen characters' strings
+  var passwordText = "";
 
-  // if the user selected includeUpperCase (=== true), then add upperCase character string to passwordText
+  // concatenate char strings for with user's chosen character types
   if (includeUpperCase) {
-    passwordChars += chars.upperCase;
+    passwordText += chars.uppercase;
   }
-  // if the user selected includeLowerCase (=== true), then add lowerCase character string to passwordText
+
   if (includeLowerCase) {
-    passwordChars += chars.lowerCase;
+    passwordText += chars.lowercase;
   }
-  // if the user selected includeNumericChars (=== true), then add number character string to passwordText
+
   if (includeNumericChars) {
-    passwordChars += chars.number;
+    passwordText += chars.numeric;
   }
-  // if the user selected includeSpecialChars (=== true), then add special character string to passwordText
+
   if (includeSpecialChars) {
-    passwordChars += chars.special;
+    passwordText += chars.special;
   }
-  console.log("passwordText after characters chosen: " + passwordChars);
-  // Randomly choose a character rom the concatenated passwordChar string until the user's chosen password length is reached
-  for (var i = 0; i < passwordLength; i++) {
-    password += passwordChars.charAt(
-      Math.floor(Math.random() * passwordChars.length)
+  // the loop chooses a random character from the concatenated string until the passwordLength reached
+  var password = "";
+  for (let i = 0; i < passwordLength; i++) {
+    password += passwordText.charAt(
+      Math.floor(Math.random() * passwordText.length)
     );
   }
-  ///// END generate the password ///////////////////////
-
-  //return the generated password to the writePassword() function
+  // Returns the password within the text area
   return password;
 }
 
@@ -77,7 +67,7 @@ function createPasswordLength() {
   // get user's choice for password length
   var userPasswordLength = prompt(
     `Choose your password length:
-      Enter a number greater than 0 and between 8 and 128`
+      Enter a number greater between 8 and 128 inclusive`
   );
   if (userPasswordLength === null) {
     return; // break out of the prompt
@@ -90,10 +80,8 @@ function createPasswordLength() {
     createPasswordLength();
     return;
   } else {
-    console.log(userPasswordLength);
     alert(`Your chosen password length is ${userPasswordLength}`);
     passwordLength = parseInt(userPasswordLength);
-    console.log("parseInt password length: " + passwordLength);
     return passwordLength;
   }
 }
@@ -120,7 +108,6 @@ function chooseCharacterTypes() {
     includeNumericChars === true ||
     includeSpecialChars === true
   ) {
-    var charChosen = true;
     alert(
       `Your password will include the character types marked "true"
       Upper Case: ${includeUpperCase}
@@ -131,10 +118,10 @@ function chooseCharacterTypes() {
   } else {
     alert(`You must select at least one character type for your password.`);
     chooseCharacterTypes();
-    /// cannot work out how provide the option for the user to exit the pop-ups here if they don't want to continue;
+    /// cannot work out the option for the user to exit the pop-ups here ;
   }
 }
 
 // Add event listener to generate button
-// Clicking button triggers writePassword function
+// Runs the writePassword function when clicked
 generateBtn.addEventListener("click", writePassword);
