@@ -77,7 +77,7 @@ function createPasswordLength() {
   // get user's choice for password length
   var userPasswordLength = prompt(
     `Choose your password length:
-      Enter a number between 8 and 128 inclusive`
+      Enter a number greater than 0 and between 8 and 128`
   );
   if (userPasswordLength === null) {
     return; // break out of the prompt

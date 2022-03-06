@@ -45,10 +45,14 @@ Select the password text and use your local copy function (e.g. select the text 
 
 The Password Generator
 - Enables a user to input their preferred password length
-- Provides the user a choice of four character types from which the user can use one or multiple character types
+- Provides the user a choice of four character types from which the user can use one or multiple character types from
+  - upper case letters
+  - lower case letters
+  - numbers 
+  - special characters ([List of special characters adapted from OWASP Foundation's list](https://www.owasp.org/index.php/Password_special_characters))
 - Generates a password that 
   - consists of randomly selected characters from the user's selected character types 
-  -  matches the password length inputted by the user
+  - matches the password length inputted by the user
 - Displays the generated password to the user in a form that the user can copy to use as required
 - Validates the user's unput and selections so that a secure password is generated
   - password length must be inputted as a number between 8 and 128
