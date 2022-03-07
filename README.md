@@ -5,6 +5,8 @@ The password generator is a tool for generating a secure password. Longer passwo
 
 The password generator gives you control over password length and the character types used to create the password text.
 
+[Deployed Password Generator application](https://grace-anderson.github.io/password-generator/)
+
 
 ## Usage
 Use the Password Generator to generate a password by choosing
@@ -15,7 +17,9 @@ Use the Password Generator to generate a password by choosing
   - numbers 
   - special characters
 
-The application code is available on [GitHub](https://github.com/grace-anderson/password-generator/tree/main) 
+The application code is available on [GitHub](https://github.com/grace-anderson/password-generator/tree/main). 
+
+
 
 ### Instructions
 
