@@ -66,7 +66,7 @@ function chooseCharacterTypes() {
     "Do you want LOWER case letters in your password?"
   );
   includeNumericChars = window.confirm(
-    "Do you want NUMERIC characters in your password?"
+    "Do you want NUMBERS in your password?"
   );
   includeSpecialChars = window.confirm(
     "Do you want SPECIAL characters in your password?"
@@ -82,12 +82,12 @@ function chooseCharacterTypes() {
       `Your password will include the character types marked "true"
       Upper Case: ${includeUpperCase}
       Lower Case: ${includeLowerCase}
-      Numeric Characters: ${includeNumericChars}
+      Numbers: ${includeNumericChars}
       Special Characters: ${includeSpecialChars}`
     );
   } else {
     alert(`You must select at least one character type for your password.`);
-    chooseCharacterTypes(); /// TO DO - work out the option for the user to exit the pop-ups here ;
+    chooseCharacterTypes(); /// TO DO - work out how the user can exit the pop-ups here ;
   }
 }
 
@@ -95,9 +95,9 @@ function chooseCharacterTypes() {
 function createPasswordText() {
   // strings to be concatenated to form the string from which the password is created
   var chars = {
-    lowercase: "abcdefghijklmnopqrstuvwxyz",
-    uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-    numeric: "0123456789",
+    lowercase: `abcdefghijklmnopqrstuvwxyz`,
+    uppercase: `ABCDEFGHIJKLMNOPQRSTUVWXYZ`,
+    numeric: `0123456789`,
     special: "!#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",
   };
 
@@ -119,7 +119,7 @@ function createPasswordText() {
   if (includeSpecialChars) {
     passwordText += chars.special;
   }
-  // the loop chooses a random character from the concatenated string until passwordLength reached
+  // the loop chooses a random character from the concatenated string to create the password string until passwordLength reached
   password = "";
   for (let i = 0; i < passwordLength; i++) {
     password += passwordText.charAt(
