@@ -73,13 +73,13 @@ The Password Generator
 3. When I click the **Generate Password** button, the first prompt appears requesting password length (see Mockup 2 below)
 4. When I enter a number between 8 and 128 inclusive in the password length prompt, the number I entered is confirmed (see Mockup 3 below) 
 5. If I do not enter a number between 8 and 128 inclusive in the password length prompt, the password length prompt input field clears so that I can enter a valid number
-6. When I click OK to the password length confirmation prompt, I am presented with a series of four prompts requesting confirmation of character types (see Mockup 4 below)
-7. If I click OK to the character type prompt, that character type will be included in the password AND I will be presented with the next prompt.
-8. If I click Cancel to the character type prompt, that character type will not be included in the password AND I will be presented with the next prompt.
-9. After I click OK or Cancel on the Special Characters prompt I am  presented with a confirmation of my charahter type selections. Selected character types are marked with "true". Non-selected character types are marked with "false". (see Mockup 5 below)
+6. When I click OK to the password length confirmation prompt, I am presented with a series of four prompts requesting confirmation of character types to include in the password (see Mockup 4 below)
+7. If I click OK to a character type prompt that character type will be included in the password, then I will be presented with the next prompt.
+8. If I click Cancel to the character type prompt that character type will not be included in the password, then I will be presented with the next prompt.
+9. After I click OK or Cancel on the Special Characters prompt I am  presented with a confirmation of my character type selections. Selected character types are marked with "true". Non-selected character types are marked with "false". (see Mockup 5 below)
 10. When I click OK to the character type confirmation prompt, a password matching my inputted password length and selected character types displays in the text area, replacing the placeholder text (see Mockup 6)
 11. I can successfully copy the displayed password for use outside the application
-12. While the generated password displays in the application, I can select the **Generate Password** button and complete the prompts to generate a new password. The generated password remains on the page and is replaced by the newly generated password.
+12. While the generated password displays in the application, I can select the **Generate Password** button and complete the prompts to generate a new password. The previously generated password is replaced by the newly generated password.
 
 
 ## Challenges and Further Work
