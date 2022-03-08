@@ -1,4 +1,5 @@
-//global variables
+//variables
+var password = "";
 var passwordLength = 0;
 var includeUpperCase = false;
 var includeLowerCase = false;
@@ -9,7 +10,7 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password text area
 function writePassword() {
-  // Return password
+  // Call generatePassword to create and return password
   var password = generatePassword();
 
   // Select the password text area
@@ -19,52 +20,21 @@ function writePassword() {
   passwordText.value = password;
 }
 
+// Get password length, character types and password text
 function generatePassword() {
   //user inputs passwordLength
-  createPasswordLength()
+  createPasswordLength();
   //user chooses character types to create password
-  chooseCharacterTypes()
+  chooseCharacterTypes();
 
-  // strings to be concatenated to form the string from which the password is created
-  var chars = {
-    lowercase: "abcdefghijklmnopqrstuvwxyz",
-    uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-    numeric: "0123456789",
-    special: "!#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",
-  };
-
-  var passwordText = "";
-
-  // concatenate char strings for with user's chosen character types
-  if (includeUpperCase) {
-    passwordText += chars.uppercase;
-  }
-
-  if (includeLowerCase) {
-    passwordText += chars.lowercase;
-  }
-
-  if (includeNumericChars) {
-    passwordText += chars.numeric;
-  }
-
-  if (includeSpecialChars) {
-    passwordText += chars.special;
-  }
-  // the loop chooses a random character from the concatenated string until the passwordLength reached
-  var password = "";
-  for (let i = 0; i < passwordLength; i++) {
-    password += passwordText.charAt(
-      Math.floor(Math.random() * passwordText.length)
-    );
-  }
-  // Returns the password within the text area
+  createPasswordText();
+  //pass password to writePassword()
   return password;
 }
 
 // create password length
 function createPasswordLength() {
-  // get user's choice for password length
+  // get user input for password length
   var userPasswordLength = prompt(
     `Choose your password length:
       Enter a number greater between 8 and 128 inclusive`
@@ -117,9 +87,47 @@ function chooseCharacterTypes() {
     );
   } else {
     alert(`You must select at least one character type for your password.`);
-    chooseCharacterTypes();
-    /// cannot work out the option for the user to exit the pop-ups here ;
+    chooseCharacterTypes(); /// TO DO - work out the option for the user to exit the pop-ups here ;
   }
+}
+
+//create password text to match user's inputted length and chosen character types
+function createPasswordText() {
+  // strings to be concatenated to form the string from which the password is created
+  var chars = {
+    lowercase: "abcdefghijklmnopqrstuvwxyz",
+    uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    numeric: "0123456789",
+    special: "!#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",
+  };
+
+  var passwordText = "";
+
+  // concatenate char strings from user's chosen character types
+  if (includeUpperCase) {
+    passwordText += chars.uppercase;
+  }
+
+  if (includeLowerCase) {
+    passwordText += chars.lowercase;
+  }
+
+  if (includeNumericChars) {
+    passwordText += chars.numeric;
+  }
+
+  if (includeSpecialChars) {
+    passwordText += chars.special;
+  }
+  // the loop chooses a random character from the concatenated string until passwordLength reached
+  password = "";
+  for (let i = 0; i < passwordLength; i++) {
+    password += passwordText.charAt(
+      Math.floor(Math.random() * passwordText.length)
+    );
+  }
+  // Returns the password 
+  return password;
 }
 
 // Add event listener to generate button
